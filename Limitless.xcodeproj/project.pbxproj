@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		BC2569201DF00B4D000EA2C3 /* UIColor+CydiaColors.m in Sources */ = {isa = PBXBuildFile; fileRef = BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */; };
 		FA01D21C1D1B22B100B49E70 /* DiskUsage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = FA01D20F1D1B22B100B49E70 /* DiskUsage.cpp */; };
 		FA01D21D1D1B22B100B49E70 /* lookup3.c in Sources */ = {isa = PBXBuildFile; fileRef = FA01D2111D1B22B100B49E70 /* lookup3.c */; };
 		FA01D2211D1B22B100B49E70 /* Sources.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA01D2161D1B22B100B49E70 /* Sources.mm */; };
@@ -28,7 +29,7 @@
 		FA0311681D1B2B3D008690CA /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0311671D1B2B3D008690CA /* CoreFoundation.framework */; };
 		FA03116A1D1B2B41008690CA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0311691D1B2B41008690CA /* CoreGraphics.framework */; };
 		FA03116C1D1B2B46008690CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03116B1D1B2B46008690CA /* Foundation.framework */; };
-		FA0311711D1B2B4E008690CA /* SpringBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03116E1D1B2B4D008690CA /* SpringBoardServices.framework */; };
+		FA0311711D1B2B4E008690CA /* SpringBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03116E1D1B2B4D008690CA /* SpringBoardServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		FA0311721D1B2B4E008690CA /* WebCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03116F1D1B2B4E008690CA /* WebCore.framework */; };
 		FA0311741D1B2B67008690CA /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0311731D1B2B67008690CA /* SystemConfiguration.framework */; };
 		FA03117A1D1B2C14008690CA /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA0311791D1B2C14008690CA /* libicucore.tbd */; };
@@ -251,8 +252,8 @@
 		FA27AACF1D78EFE600563529 /* libapt-pkg.dylib in Copy APT Dylibs */ = {isa = PBXBuildFile; fileRef = FA27AACD1D78EFE600563529 /* libapt-pkg.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		FA28E71A1D1B21A5003D3724 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA28E7191D1B21A5003D3724 /* Assets.xcassets */; };
 		FA3A18361DEAB1F3000557AC /* runAsSuperuser.m in Sources */ = {isa = PBXBuildFile; fileRef = FA3A18351DEAB1F3000557AC /* runAsSuperuser.m */; };
-		FA3D50DA1DED8C870046A0AC /* LMXTransliterate.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA3D50D91DED8C870046A0AC /* LMXTransliterate.mm */; };
-		FA3D50DF1DED900E0046A0AC /* TMXTransliteration.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA3D50DE1DED900E0046A0AC /* TMXTransliteration.mm */; };
+		FA3D50DA1DED8C870046A0AC /* LMXLocalizedTableSections.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA3D50D91DED8C870046A0AC /* LMXLocalizedTableSections.mm */; };
+		FA3D50DF1DED900E0046A0AC /* TestLocalizedTableSection.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA3D50DE1DED900E0046A0AC /* TestLocalizedTableSection.mm */; };
 		FA3D50E41DED9D050046A0AC /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FA3D50E31DED9D050046A0AC /* libicucore.tbd */; };
 		FA6C862D1D749C8100FB99CF /* UIWebDocumentView+BugFixes.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6C862C1D749C8100FB99CF /* UIWebDocumentView+BugFixes.mm */; };
 		FA6C86331D74A97100FB99CF /* NSString+Cydia.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA6C86321D74A97100FB99CF /* NSString+Cydia.mm */; };
@@ -307,7 +308,20 @@
 		FA7DB9021DE0276D00F874E6 /* APTManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = FA7DB9011DE0276D00F874E6 /* APTManager.mm */; };
 		FA9073FD1D7456A900BA0D1D /* GraphicsServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA9073FC1D7456A900BA0D1D /* GraphicsServices.framework */; };
 		FAA811AF1D745FF700C674C9 /* main.mm in Sources */ = {isa = PBXBuildFile; fileRef = FAA811AE1D745FF700C674C9 /* main.mm */; };
+		FAC1A72B1DEFA688008256A4 /* LMXLaunchProcess.m in Sources */ = {isa = PBXBuildFile; fileRef = FAC1A72A1DEFA688008256A4 /* LMXLaunchProcess.m */; };
 		FAC3B0C81DE281DA000423DB /* Addons.png in Resources */ = {isa = PBXBuildFile; fileRef = FA1FE99A1D79D82000CF5AAD /* Addons.png */; };
+		FAE642991DF13EC200E975B8 /* featureCatalogMain.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE642981DF13EC200E975B8 /* featureCatalogMain.m */; };
+		FAE6429C1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE6429B1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m */; };
+		FAE6429F1DF13EC200E975B8 /* CatalogTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE6429E1DF13EC200E975B8 /* CatalogTableViewController.m */; };
+		FAE642A71DF13EC200E975B8 /* FeatureCatalogLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FAE642A51DF13EC200E975B8 /* FeatureCatalogLaunchScreen.storyboard */; };
+		FAE642AC1DF142CC00E975B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA28E7191D1B21A5003D3724 /* Assets.xcassets */; };
+		FAE642B01DF1433100E975B8 /* LMXRespringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE642AF1DF1433100E975B8 /* LMXRespringViewController.m */; };
+		FAE642B11DF1433100E975B8 /* LMXRespringViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE642AF1DF1433100E975B8 /* LMXRespringViewController.m */; };
+		FAE642B41DF14B9B00E975B8 /* LMXRespringController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE642B31DF14B9B00E975B8 /* LMXRespringController.m */; };
+		FAE642B51DF14B9B00E975B8 /* LMXRespringController.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE642B31DF14B9B00E975B8 /* LMXRespringController.m */; };
+		FAE642BC1DF151E600E975B8 /* SpringBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA03116E1D1B2B4D008690CA /* SpringBoardServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FAE642BF1DF153B900E975B8 /* FrontBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE642BE1DF153B900E975B8 /* FrontBoardServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		FAE642C01DF153B900E975B8 /* FrontBoardServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE642BE1DF153B900E975B8 /* FrontBoardServices.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -465,6 +479,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BC25691E1DF00B4D000EA2C3 /* UIColor+CydiaColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+CydiaColors.h"; sourceTree = "<group>"; };
+		BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+CydiaColors.m"; sourceTree = "<group>"; };
 		FA01D20C1D1B22B100B49E70 /* cfversion.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = cfversion.mm; sourceTree = "<group>"; };
 		FA01D20E1D1B22B100B49E70 /* Cytore.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Cytore.hpp; sourceTree = "<group>"; };
 		FA01D20F1D1B22B100B49E70 /* DiskUsage.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DiskUsage.cpp; sourceTree = "<group>"; };
@@ -747,9 +763,9 @@
 		FA3A18331DEAB1F3000557AC /* runAsSuperuser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = runAsSuperuser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA3A18351DEAB1F3000557AC /* runAsSuperuser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = runAsSuperuser.m; sourceTree = "<group>"; };
 		FA3A18371DEAB1F3000557AC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA3D50D81DED8C870046A0AC /* LMXTransliterate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMXTransliterate.h; sourceTree = "<group>"; };
-		FA3D50D91DED8C870046A0AC /* LMXTransliterate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LMXTransliterate.mm; sourceTree = "<group>"; };
-		FA3D50DE1DED900E0046A0AC /* TMXTransliteration.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TMXTransliteration.mm; sourceTree = "<group>"; };
+		FA3D50D81DED8C870046A0AC /* LMXLocalizedTableSections.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMXLocalizedTableSections.h; sourceTree = "<group>"; };
+		FA3D50D91DED8C870046A0AC /* LMXLocalizedTableSections.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LMXLocalizedTableSections.mm; sourceTree = "<group>"; };
+		FA3D50DE1DED900E0046A0AC /* TestLocalizedTableSection.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TestLocalizedTableSection.mm; sourceTree = "<group>"; };
 		FA3D50E31DED9D050046A0AC /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		FA6C862C1D749C8100FB99CF /* UIWebDocumentView+BugFixes.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = "UIWebDocumentView+BugFixes.mm"; sourceTree = "<group>"; };
 		FA6C862E1D749D1D00FB99CF /* CyteKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CyteKit.h; sourceTree = "<group>"; };
@@ -869,6 +885,24 @@
 		FA9073FC1D7456A900BA0D1D /* GraphicsServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GraphicsServices.framework; path = External/System/Library/PrivateFrameworks/GraphicsServices.framework; sourceTree = "<group>"; };
 		FAA811AE1D745FF700C674C9 /* main.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = main.mm; sourceTree = "<group>"; };
 		FAA811B41D74669600C674C9 /* Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
+		FAC1A7291DEFA688008256A4 /* LMXLaunchProcess.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMXLaunchProcess.h; sourceTree = "<group>"; };
+		FAC1A72A1DEFA688008256A4 /* LMXLaunchProcess.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXLaunchProcess.m; sourceTree = "<group>"; };
+		FAE642951DF13EC200E975B8 /* Feature Catalog.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Feature Catalog.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FAE642981DF13EC200E975B8 /* featureCatalogMain.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = featureCatalogMain.m; sourceTree = "<group>"; };
+		FAE6429A1DF13EC200E975B8 /* FeatureCatalogAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeatureCatalogAppDelegate.h; sourceTree = "<group>"; };
+		FAE6429B1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeatureCatalogAppDelegate.m; sourceTree = "<group>"; };
+		FAE6429D1DF13EC200E975B8 /* CatalogTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CatalogTableViewController.h; sourceTree = "<group>"; };
+		FAE6429E1DF13EC200E975B8 /* CatalogTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CatalogTableViewController.m; sourceTree = "<group>"; };
+		FAE642A61DF13EC200E975B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/FeatureCatalogLaunchScreen.storyboard; sourceTree = "<group>"; };
+		FAE642A81DF13EC200E975B8 /* FeatureCatalogInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = FeatureCatalogInfo.plist; sourceTree = "<group>"; };
+		FAE642AE1DF1433100E975B8 /* LMXRespringViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMXRespringViewController.h; sourceTree = "<group>"; };
+		FAE642AF1DF1433100E975B8 /* LMXRespringViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXRespringViewController.m; sourceTree = "<group>"; };
+		FAE642B21DF14B9B00E975B8 /* LMXRespringController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LMXRespringController.h; sourceTree = "<group>"; };
+		FAE642B31DF14B9B00E975B8 /* LMXRespringController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LMXRespringController.m; sourceTree = "<group>"; };
+		FAE642B61DF14C0300E975B8 /* FeatureCatalogPrefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeatureCatalogPrefix.pch; sourceTree = "<group>"; };
+		FAE642BB1DF1508B00E975B8 /* SpringBoardServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpringBoardServices.h; sourceTree = "<group>"; };
+		FAE642BD1DF1526300E975B8 /* FrontBoardServices.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FrontBoardServices.h; sourceTree = "<group>"; };
+		FAE642BE1DF153B900E975B8 /* FrontBoardServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FrontBoardServices.framework; path = External/System/Library/PrivateFrameworks/FrontBoardServices.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -882,6 +916,7 @@
 				FA9073FD1D7456A900BA0D1D /* GraphicsServices.framework in Frameworks */,
 				FA0311741D1B2B67008690CA /* SystemConfiguration.framework in Frameworks */,
 				FA06A3901DDEAE3600AA9B02 /* libapt-inst.tbd in Frameworks */,
+				FAE642BF1DF153B900E975B8 /* FrontBoardServices.framework in Frameworks */,
 				FA06A38E1DDEADFD00AA9B02 /* libapt-pkg.tbd in Frameworks */,
 				FA03116C1D1B2B46008690CA /* Foundation.framework in Frameworks */,
 				FA03116A1D1B2B41008690CA /* CoreGraphics.framework in Frameworks */,
@@ -905,6 +940,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA3D50E41DED9D050046A0AC /* libicucore.tbd in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAE642921DF13EC200E975B8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAE642BC1DF151E600E975B8 /* SpringBoardServices.framework in Frameworks */,
+				FAE642C01DF153B900E975B8 /* FrontBoardServices.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1023,11 +1067,13 @@
 				FA03116B1D1B2B46008690CA /* Foundation.framework */,
 				FA0311691D1B2B41008690CA /* CoreGraphics.framework */,
 				FA0311671D1B2B3D008690CA /* CoreFoundation.framework */,
+				FAE642BE1DF153B900E975B8 /* FrontBoardServices.framework */,
 				FA27AACC1D78EFE600563529 /* libapt-inst.dylib */,
 				FA27AACD1D78EFE600563529 /* libapt-pkg.dylib */,
 				FA06A38F1DDEAE3600AA9B02 /* libapt-inst.tbd */,
 				FA06A38D1DDEADFD00AA9B02 /* libapt-pkg.tbd */,
 				FA0311791D1B2C14008690CA /* libicucore.tbd */,
+				FA3D50E31DED9D050046A0AC /* libicucore.tbd */,
 			);
 			name = "Frameworks & Libraries";
 			sourceTree = "<group>";
@@ -1377,12 +1423,13 @@
 			isa = PBXGroup;
 			children = (
 				FAA811AB1D745FD100C674C9 /* Source */,
+				FAE642B71DF14F8400E975B8 /* External */,
 				FA28E70C1D1B21A5003D3724 /* Resources */,
 				FA9010FC1DE12B1C00A607AC /* Tests */,
 				FA3A182E1DEAB1C6000557AC /* Tools */,
 				FA0311C41D1B5BBA008690CA /* Frameworks & Libraries */,
+				FAE642961DF13EC200E975B8 /* Feature Catalog */,
 				FA28E70B1D1B21A5003D3724 /* Products */,
-				FA3D50E21DED9D050046A0AC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1392,6 +1439,7 @@
 				FA28E70A1D1B21A5003D3724 /* Limitless.app */,
 				FA9010FB1DE12B1C00A607AC /* Tests.xctest */,
 				FA3A18331DEAB1F3000557AC /* runAsSuperuser.app */,
+				FAE642951DF13EC200E975B8 /* Feature Catalog.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1427,8 +1475,8 @@
 		FA3D50D71DED8BFF0046A0AC /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				FA3D50D81DED8C870046A0AC /* LMXTransliterate.h */,
-				FA3D50D91DED8C870046A0AC /* LMXTransliterate.mm */,
+				FA3D50D81DED8C870046A0AC /* LMXLocalizedTableSections.h */,
+				FA3D50D91DED8C870046A0AC /* LMXLocalizedTableSections.mm */,
 			);
 			path = Localization;
 			sourceTree = "<group>";
@@ -1436,17 +1484,9 @@
 		FA3D50DB1DED8FBC0046A0AC /* Localization */ = {
 			isa = PBXGroup;
 			children = (
-				FA3D50DE1DED900E0046A0AC /* TMXTransliteration.mm */,
+				FA3D50DE1DED900E0046A0AC /* TestLocalizedTableSection.mm */,
 			);
 			path = Localization;
-			sourceTree = "<group>";
-		};
-		FA3D50E21DED9D050046A0AC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				FA3D50E31DED9D050046A0AC /* libicucore.tbd */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		FA6C86291D749C5300FB99CF /* Categories */ = {
@@ -1501,6 +1541,8 @@
 				FA6C863E1D74AC6E00FB99CF /* DisplayHelpers.mm */,
 				FA23E2C61D77549F001FBE4A /* Display.h */,
 				FA23E2C71D7754A0001FBE4A /* Display.mm */,
+				BC25691E1DF00B4D000EA2C3 /* UIColor+CydiaColors.h */,
+				BC25691F1DF00B4D000EA2C3 /* UIColor+CydiaColors.m */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1537,6 +1579,8 @@
 				FA23E2CA1D776245001FBE4A /* Device.mm */,
 				FA06A3BD1DDEE98000AA9B02 /* Platform.h */,
 				FA06A3BE1DDEE98000AA9B02 /* Platform.m */,
+				FAC1A7291DEFA688008256A4 /* LMXLaunchProcess.h */,
+				FAC1A72A1DEFA688008256A4 /* LMXLaunchProcess.m */,
 			);
 			path = System;
 			sourceTree = "<group>";
@@ -1879,6 +1923,7 @@
 		FA6D8CA31D746B6B00283EDB /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				FAE642AD1DF1431200E975B8 /* Respring */,
 				FA6C86F41D7625A500FB99CF /* Stashing */,
 				FA6C86EB1D76227000FB99CF /* Sources */,
 				FA6C86CC1D760C1800FB99CF /* Navigation */,
@@ -2131,6 +2176,66 @@
 			path = Javascript;
 			sourceTree = "<group>";
 		};
+		FAE642961DF13EC200E975B8 /* Feature Catalog */ = {
+			isa = PBXGroup;
+			children = (
+				FAE6429A1DF13EC200E975B8 /* FeatureCatalogAppDelegate.h */,
+				FAE6429B1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m */,
+				FAE6429D1DF13EC200E975B8 /* CatalogTableViewController.h */,
+				FAE6429E1DF13EC200E975B8 /* CatalogTableViewController.m */,
+				FAE642A51DF13EC200E975B8 /* FeatureCatalogLaunchScreen.storyboard */,
+				FAE642A81DF13EC200E975B8 /* FeatureCatalogInfo.plist */,
+				FAE642B61DF14C0300E975B8 /* FeatureCatalogPrefix.pch */,
+				FAE642971DF13EC200E975B8 /* Supporting Files */,
+			);
+			name = "Feature Catalog";
+			path = "Tools/Feature Catalog";
+			sourceTree = "<group>";
+		};
+		FAE642971DF13EC200E975B8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FAE642981DF13EC200E975B8 /* featureCatalogMain.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FAE642AD1DF1431200E975B8 /* Respring */ = {
+			isa = PBXGroup;
+			children = (
+				FAE642AE1DF1433100E975B8 /* LMXRespringViewController.h */,
+				FAE642AF1DF1433100E975B8 /* LMXRespringViewController.m */,
+				FAE642B21DF14B9B00E975B8 /* LMXRespringController.h */,
+				FAE642B31DF14B9B00E975B8 /* LMXRespringController.m */,
+			);
+			path = Respring;
+			sourceTree = "<group>";
+		};
+		FAE642B71DF14F8400E975B8 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				FAE642B81DF14FA200E975B8 /* Headers */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		FAE642B81DF14FA200E975B8 /* Headers */ = {
+			isa = PBXGroup;
+			children = (
+				FAE642B91DF14FAE00E975B8 /* Private */,
+			);
+			path = Headers;
+			sourceTree = "<group>";
+		};
+		FAE642B91DF14FAE00E975B8 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				FAE642BB1DF1508B00E975B8 /* SpringBoardServices.h */,
+				FAE642BD1DF1526300E975B8 /* FrontBoardServices.h */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2192,6 +2297,23 @@
 			productReference = FA9010FB1DE12B1C00A607AC /* Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		FAE642941DF13EC200E975B8 /* Feature Catalog */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FAE642AB1DF13EC200E975B8 /* Build configuration list for PBXNativeTarget "Feature Catalog" */;
+			buildPhases = (
+				FAE642911DF13EC200E975B8 /* Sources */,
+				FAE642921DF13EC200E975B8 /* Frameworks */,
+				FAE642931DF13EC200E975B8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Feature Catalog";
+			productName = "Feature Catalog";
+			productReference = FAE642951DF13EC200E975B8 /* Feature Catalog.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -2204,23 +2326,23 @@
 				TargetAttributes = {
 					FA28E7091D1B21A5003D3724 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 9UKYMVL752;
 						ProvisioningStyle = Automatic;
 					};
 					FA3A18321DEAB1F3000557AC = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = E6QK4MU6LM;
 						ProvisioningStyle = Automatic;
 					};
 					FA9010FA1DE12B1C00A607AC = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = E6QK4MU6LM;
 						ProvisioningStyle = Automatic;
 						TestTargetID = FA28E7091D1B21A5003D3724;
 					};
 					FAA88F061DE7738100039F54 = {
 						CreatedOnToolsVersion = 8.1;
-						DevelopmentTeam = E6QK4MU6LM;
+						ProvisioningStyle = Automatic;
+					};
+					FAE642941DF13EC200E975B8 = {
+						CreatedOnToolsVersion = 8.1;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -2251,6 +2373,7 @@
 				vi,
 				"zh-Hans",
 				"zh-Hant",
+				Base,
 			);
 			mainGroup = FA28E7011D1B21A5003D3724;
 			productRefGroup = FA28E70B1D1B21A5003D3724 /* Products */;
@@ -2261,6 +2384,7 @@
 				FA9010FA1DE12B1C00A607AC /* Tests */,
 				FAA88F061DE7738100039F54 /* lint */,
 				FA3A18321DEAB1F3000557AC /* runAsSuperuser */,
+				FAE642941DF13EC200E975B8 /* Feature Catalog */,
 			);
 		};
 /* End PBXProject section */
@@ -2377,6 +2501,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FAE642931DF13EC200E975B8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAE642A71DF13EC200E975B8 /* FeatureCatalogLaunchScreen.storyboard in Resources */,
+				FAE642AC1DF142CC00E975B8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -2392,7 +2525,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "setUpSymlinksScript=\"${PROJECT_DIR}/Scripts/setUpSymlinks.rb\"\n/usr/bin/env ruby $setUpSymlinksScript";
+			shellScript = "setUpSymlinksScript=\"${PROJECT_DIR}/Scripts/setUpSymlinks.rb\"\n/usr/bin/env ruby \"${setUpSymlinksScript}\"";
 		};
 		FAA88F0A1DE7738600039F54 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2417,7 +2550,9 @@
 				FA6C86651D74C49B00FB99CF /* Database.mm in Sources */,
 				FA0311AA1D1B2CBD008690CA /* TableViewCell.mm in Sources */,
 				FA6C86FC1D7626B500FB99CF /* CYURLCache.mm in Sources */,
+				FAE642B41DF14B9B00E975B8 /* LMXRespringController.m in Sources */,
 				FA6C86891D758DC700FB99CF /* Logging.mm in Sources */,
+				FAC1A72B1DEFA688008256A4 /* LMXLaunchProcess.m in Sources */,
 				FA6C86C01D76097400FB99CF /* CYPackageController.mm in Sources */,
 				FA6C86E41D7620A900FB99CF /* SearchController.mm in Sources */,
 				FA6C869C1D75940600FB99CF /* NSURL+Cydia.mm in Sources */,
@@ -2445,6 +2580,7 @@
 				FA0311C11D1B2CFD008690CA /* MIMEAddress.mm in Sources */,
 				FA6C86AA1D75EF1E00FB99CF /* ConfirmationController.mm in Sources */,
 				FA6C868E1D758FC400FB99CF /* Diversion.mm in Sources */,
+				FAE642B01DF1433100E975B8 /* LMXRespringViewController.m in Sources */,
 				FA0311AC1D1B2CBD008690CA /* WebScriptObject-Cyte.mm in Sources */,
 				FA6C86921D75907600FB99CF /* CydiaObject.mm in Sources */,
 				FA6C869F1D75960500FB99CF /* AppCacheController.mm in Sources */,
@@ -2464,7 +2600,7 @@
 				FA6C865E1D74C2AE00FB99CF /* Delegates.mm in Sources */,
 				FA0311B01D1B2CBD008690CA /* invocationWithSelector.mm in Sources */,
 				FA6C86971D75910E00FB99CF /* CydiaWebViewController.mm in Sources */,
-				FA3D50DA1DED8C870046A0AC /* LMXTransliterate.mm in Sources */,
+				FA3D50DA1DED8C870046A0AC /* LMXLocalizedTableSections.mm in Sources */,
 				FA6C86DE1D761F3600FB99CF /* SectionsController.mm in Sources */,
 				FA6C863F1D74AC6E00FB99CF /* DisplayHelpers.mm in Sources */,
 				FA6C86EA1D7621CC00FB99CF /* InstalledController.mm in Sources */,
@@ -2498,6 +2634,7 @@
 				FA6C86F31D76236200FB99CF /* SourcesController.mm in Sources */,
 				FA0311B11D1B2CBD008690CA /* radixSortWithSelector.mm in Sources */,
 				FA6C86EF1D76228B00FB99CF /* SourceCell.mm in Sources */,
+				BC2569201DF00B4D000EA2C3 /* UIColor+CydiaColors.m in Sources */,
 				FA0311C01D1B2CFD008690CA /* LoadingViewController.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2514,7 +2651,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA3D50DF1DED900E0046A0AC /* TMXTransliteration.mm in Sources */,
+				FA3D50DF1DED900E0046A0AC /* TestLocalizedTableSection.mm in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FAE642911DF13EC200E975B8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FAE642B11DF1433100E975B8 /* LMXRespringViewController.m in Sources */,
+				FAE6429F1DF13EC200E975B8 /* CatalogTableViewController.m in Sources */,
+				FAE6429C1DF13EC200E975B8 /* FeatureCatalogAppDelegate.m in Sources */,
+				FAE642991DF13EC200E975B8 /* featureCatalogMain.m in Sources */,
+				FAE642B51DF14B9B00E975B8 /* LMXRespringController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2870,6 +3019,14 @@
 			name = Sections.strings;
 			sourceTree = "<group>";
 		};
+		FAE642A51DF13EC200E975B8 /* FeatureCatalogLaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FAE642A61DF13EC200E975B8 /* Base */,
+			);
+			name = FeatureCatalogLaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -2920,6 +3077,7 @@
 					"\"$(SRCROOT)/Source/Legacy\"",
 					"\"$(SRCROOT)/External/Headers\"",
 					"\"$(SRCROOT)/External/Headers/Linked\"",
+					"\"$(SRCROOT)/External/Headers/Linked/SingleHeaders\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_NO_PIE = NO;
@@ -2927,6 +3085,13 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_CFLAGS = (
+					"-idirafter",
+					"\"$(SRCROOT)/External/icu/icuSources/common\"",
+					"-idirafter",
+					"\"$(SRCROOT)/External/icu/icuSources/i18n\"",
+					"-idirafter\"/usr/include\"",
+				);
+				"OTHER_CFLAGS[sdk=iphonesimulator*]" = (
 					"-idirafter",
 					"\"$(SRCROOT)/External/icu/icuSources/common\"",
 					"-idirafter",
@@ -2979,12 +3144,20 @@
 					"\"$(SRCROOT)/Source/Legacy\"",
 					"\"$(SRCROOT)/External/Headers\"",
 					"\"$(SRCROOT)/External/Headers/Linked\"",
+					"\"$(SRCROOT)/External/Headers/Linked/SingleHeaders\"",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_NO_PIE = NO;
 				LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/External/usr/lib\"";
 				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_CFLAGS = (
+					"-idirafter",
+					"\"$(SRCROOT)/External/icu/icuSources/common\"",
+					"-idirafter",
+					"\"$(SRCROOT)/External/icu/icuSources/i18n\"",
+					"-idirafter\"/usr/include\"",
+				);
+				"OTHER_CFLAGS[sdk=iphonesimulator*]" = (
 					"-idirafter",
 					"\"$(SRCROOT)/External/icu/icuSources/common\"",
 					"-idirafter",
@@ -3002,9 +3175,15 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = NO;
+				"CLANG_ENABLE_MODULES[sdk=iphonesimulator*]" = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9UKYMVL752;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/External/System/Library/PrivateFrameworks",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREFIX_HEADER = Source/Headers/Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -3023,9 +3202,15 @@
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = NO;
+				"CLANG_ENABLE_MODULES[sdk=iphonesimulator*]" = YES;
 				CLANG_ENABLE_OBJC_ARC = NO;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 9UKYMVL752;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/External/System/Library/PrivateFrameworks",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREFIX_HEADER = Source/Headers/Prefix.pch;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
@@ -3044,7 +3229,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				DEVELOPMENT_TEAM = E6QK4MU6LM;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = Tools/runAsSuperuser/Info.plist;
@@ -3061,7 +3246,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				DEVELOPMENT_TEAM = E6QK4MU6LM;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Tools/runAsSuperuser/Info.plist;
 				INFOPLIST_OUTPUT_FORMAT = XML;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3078,7 +3263,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				DEVELOPMENT_TEAM = E6QK4MU6LM;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_TESTABILITY = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PREFIX_HEADER = Source/Headers/Prefix.pch;
@@ -3098,7 +3283,7 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
-				DEVELOPMENT_TEAM = E6QK4MU6LM;
+				DEVELOPMENT_TEAM = "";
 				GCC_PREFIX_HEADER = Source/Headers/Prefix.pch;
 				INFOPLIST_FILE = Tests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -3111,7 +3296,7 @@
 		FAA88F081DE7738100039F54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = E6QK4MU6LM;
+				DEVELOPMENT_TEAM = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -3119,8 +3304,58 @@
 		FAA88F091DE7738100039F54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				DEVELOPMENT_TEAM = E6QK4MU6LM;
+				DEVELOPMENT_TEAM = "";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		FAE642A91DF13EC200E975B8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = "";
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/External/System/Library/PrivateFrameworks",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREFIX_HEADER = "Tools/Feature Catalog/FeatureCatalogPrefix.pch";
+				INFOPLIST_FILE = "Tools/Feature Catalog/FeatureCatalogInfo.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"-idirafter",
+					"\"$(SRCROOT)/External/icu/icuSources/common\"",
+					"-idirafter",
+					"\"$(SRCROOT)/External/icu/icuSources/i18n\"",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "oss.Limitless.Feature-Catalog";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FAE642AA1DF13EC200E975B8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/External/System/Library/PrivateFrameworks",
+				);
+				GCC_PREFIX_HEADER = "Tools/Feature Catalog/FeatureCatalogPrefix.pch";
+				INFOPLIST_FILE = "Tools/Feature Catalog/FeatureCatalogInfo.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "oss.Limitless.Feature-Catalog";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -3168,6 +3403,15 @@
 			buildConfigurations = (
 				FAA88F081DE7738100039F54 /* Debug */,
 				FAA88F091DE7738100039F54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FAE642AB1DF13EC200E975B8 /* Build configuration list for PBXNativeTarget "Feature Catalog" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FAE642A91DF13EC200E975B8 /* Debug */,
+				FAE642AA1DF13EC200E975B8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

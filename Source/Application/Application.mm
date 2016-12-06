@@ -39,6 +39,8 @@
 #import "DisplayHelpers.hpp"
 #import "CYPackageController.h"
 #import "ConfirmationController.h"
+#import "LMXRespringController.h"
+#import "UIColor+CydiaColors.h"
 
 @interface Application () {
     _H<UIWindow> window_;
@@ -229,7 +231,7 @@
         return false;
     }
     
-    if ([tabbar_ modalViewController] != nil)
+    if ([tabbar_ presentedViewController] != nil)
         return false;
     
     // Use external process status API internally.
@@ -286,6 +288,15 @@
     Font18_ = [UIFont systemFontOfSize:18];
     Font18Bold_ = [UIFont boldSystemFontOfSize:18];
     Font22Bold_ = [UIFont boldSystemFontOfSize:22];
+    
+    if(UIColor.isDarkModeEnabled) {
+        [[UINavigationBar appearance] setBarTintColor:[UIColor cydia_tintColor]];
+        [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName: [UIColor whiteColor]}];
+        [[UITabBar appearance] setBarTintColor:[UIColor cydia_tintColor]];
+        [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+        [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    }
 }
 
 - (void)setUpPackageLists {
@@ -420,7 +431,7 @@ errno == ENOTDIR \
 }
 
 - (void) stash {
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleBlackOpaque];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     UpdateExternalStatus(1);
     [self yieldToSelector:@selector(system:)
                withObject:@"/Applications/Limitless.app/runAsSuperuser /usr/libexec/cydia/free.sh"];
@@ -496,8 +507,8 @@ errno == ENOTDIR \
 
 - (void) loadData {
     _trace();
-    if ([emulated_ modalViewController] != nil)
-        [emulated_ dismissModalViewControllerAnimated:YES];
+    if ([emulated_ presentedViewController] != nil)
+		[emulated_ dismissViewControllerAnimated:true completion:nil];
     [window_ setUserInteractionEnabled:NO];
     
     [self reloadDataWithInvocation: nil];
@@ -728,11 +739,8 @@ errno == ENOTDIR \
 
 #pragma mark - View Controllers
 
-- (void) presentModalViewController:(UIViewController *)controller
-                              force:(BOOL)force {
-    UINavigationController *navigation = [[[UINavigationController alloc]
-                                           initWithRootViewController:controller]
-                                          autorelease];
+- (void) presentModalViewController:(UIViewController *)controller force:(BOOL)force {
+    UINavigationController *navigation = [[[UINavigationController alloc] initWithRootViewController:controller] autorelease];
     
     UIViewController *parent;
     if (emulated_ == nil)
@@ -746,7 +754,7 @@ errno == ENOTDIR \
     
     if ([Device isPad])
         [navigation setModalPresentationStyle:UIModalPresentationFormSheet];
-    [parent presentModalViewController:navigation animated:YES];
+    [parent presentViewController:navigation animated:YES completion:nil];
 }
 
 - (void) disemulate {
@@ -911,7 +919,7 @@ errno == ENOTDIR \
     [window_ setUserInteractionEnabled:NO];
     
     UIViewController *target(tabbar_);
-    if (UIViewController *modal = [target modalViewController])
+    if (UIViewController *modal = [target presentedViewController])
         target = modal;
     
     [hud showInView:[target view]];
@@ -1150,7 +1158,7 @@ errno == ENOTDIR \
     
     if ([Device isPad])
         [confirm_ setModalPresentationStyle:UIModalPresentationFormSheet];
-    [tabbar_ presentModalViewController:confirm_ animated:YES];
+    [tabbar_ presentViewController:confirm_ animated:YES completion:nil];
     
     return true;
 }
@@ -1218,7 +1226,7 @@ errno == ENOTDIR \
 
 #pragma mark - Utilities
 
-- (void) system:(NSString *)command {
+- (void) system:(NSString *)command DEPRECATED_ATTRIBUTE {
     NSAutoreleasePool *pool([[NSAutoreleasePool alloc] init]);
     
     _trace();
@@ -1231,23 +1239,18 @@ errno == ENOTDIR \
 #pragma mark - SpringBoard
 
 - (void) reloadSpringBoard {
-	if (kCFCoreFoundationVersionNumber >= 700) // XXX: iOS 6.x
-		system("/bin/launchctl stop com.apple.backboardd");
-	else
-		system("/bin/launchctl stop com.apple.SpringBoard");
-	sleep(15);
-	system("/usr/bin/killall backboardd SpringBoard");
+    [LMXRespringController startRespring];
 }
 
 // Not too sure on how to implement this in the future.
 - (void) enterSafeMode {
-	system("/usr/bin/killall -SEGV SpringBoard");
+    [LMXLaunchProcess launchProcessAtPath:@"/usr/bin/killall" withArguments:@"-SEGV", @"SpringBoard", nil];
 }
 
 - (void) _uicache {
     _trace();
     if (![Device isSimulator]) {
-        system("/usr/bin/uicache");
+        [LMXLaunchProcess launchProcessAtPath:@"/usr/bin/uicache"];
     }
     _trace();
 }
@@ -1292,14 +1295,15 @@ errno == ENOTDIR \
             @synchronized (self) {
                 for (Package *broken in (id) broken_) {
                     [broken remove];
-                    NSString *id(ShellEscape([broken id]));
-                    system([[NSString stringWithFormat:@"/Applications/Limitless.app/runAsSuperuser /bin/rm -f"
-                             " /var/lib/dpkg/info/%@.prerm"
-                             " /var/lib/dpkg/info/%@.postrm"
-                             " /var/lib/dpkg/info/%@.preinst"
-                             " /var/lib/dpkg/info/%@.postinst"
-                             " /var/lib/dpkg/info/%@.extrainst_"
-                             "", id, id, id, id, id] UTF8String]);
+                    NSString *brokenID = [broken id];
+                    [LMXLaunchProcess launchProcessAtPath:@"/Applications/Limitless.app/runAsSuperuser"
+                                            withArguments: @"/bin/rm", @"-f",
+                     [NSString stringWithFormat:@"/var/lib/dpkg/info/%@.prerm", brokenID],
+                     [NSString stringWithFormat:@"/var/lib/dpkg/info/%@.postrm", brokenID],
+                     [NSString stringWithFormat:@"/var/lib/dpkg/info/%@.preinst", brokenID],
+                     [NSString stringWithFormat:@"/var/lib/dpkg/info/%@.postinst", brokenID],
+                     [NSString stringWithFormat:@"/var/lib/dpkg/info/%@.extrainst_", brokenID],
+                     nil];
                 }
                 
                 [self resolve];

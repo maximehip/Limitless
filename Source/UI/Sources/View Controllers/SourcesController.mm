@@ -18,6 +18,8 @@
 #import "Defines.h"
 #import "Source.h"
 #import "CydiaTabBarController.h"
+#import "LMXRespringController.h"
+#import "UIColor+CydiaColors.h"
 
 @implementation SourcesController
 
@@ -43,11 +45,11 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     [list_ deselectRowAtIndexPath:[list_ indexPathForSelectedRow] animated:animated];
-	
-	if (currentRepoURL && ![currentRepoURL isEqualToString:@""]) {
-		[self selectSourceWithURL:currentRepoURL];
-		currentRepoURL = @"";
-	}
+    
+    if (currentRepoURL && ![currentRepoURL isEqualToString:@""]) {
+        [self selectSourceWithURL:currentRepoURL];
+        currentRepoURL = @"";
+    }
 }
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
@@ -62,8 +64,10 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
-        case 0: return 1;
-        case 1: return [sources_ count];
+        case 0:
+            return 1;
+        case 1:
+            return [sources_ count];
         default: return 0;
     }
 }
@@ -76,60 +80,80 @@
             return nil;
         NSUInteger index([indexPath row]);
         if (index >= [sources_ count])
-            return nil;
+                return nil;
         return [sources_ objectAtIndex:index];
-    } }
+    }
+}
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"SourceCell";
     
     SourceCell *cell = (SourceCell *) [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (cell == nil) cell = [[[SourceCell alloc] initWithFrame:CGRectZero reuseIdentifier:cellIdentifier] autorelease];
+    if (cell == nil) {
+         cell = [[[SourceCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier] autorelease];
+    }
+
     [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-    
+
     Source *source([self sourceAtIndexPath:indexPath]);
-    if (source == nil)
+    
+    if (source == nil) {
         [cell setAllSource];
-	else {
+    } else {
         [cell setSource:source];
-		UILongPressGestureRecognizer *favouriteGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(favouriteGestureRecognized:)];
-		[cell addGestureRecognizer:favouriteGesture];
-	}
-	
+        UILongPressGestureRecognizer *favoriteGesture = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(favoriteGestureRecognized:)];
+        [cell addGestureRecognizer:favoriteGesture];
+    }
+  
+    // TODO: fix background color
+    if(UIColor.isDarkModeEnabled) {
+        [cell setBackgroundColor:[UIColor cydia_black]];
+    }
     return cell;
 }
 
--(void)favouriteGestureRecognized:(UILongPressGestureRecognizer*)gestureRecognizer {
-	if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
-		Source *currentSource([self sourceAtIndexPath:[list_ indexPathForCell:(UITableViewCell*)gestureRecognizer.view]]);
-		
-		UIAlertController *favouriteSheet([UIAlertController alertControllerWithTitle:@"Set as favourite" message:[NSString stringWithFormat:@"Choose which favourite to replace with \"%@\"", currentSource.name] preferredStyle:UIAlertControllerStyleActionSheet]);
-		
-		UIApplicationShortcutItem *firstShortcut([UIApplication sharedApplication].shortcutItems[0]);
-		UIApplicationShortcutItem *secondShortcut([UIApplication sharedApplication].shortcutItems[1]);
-		
-		UIAlertAction *firstPlaceAction([UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Slot 1 \"%@\"", firstShortcut.localizedTitle] style:UIAlertActionStyleDefault handler:^(UIAlertAction*action){
-			UIMutableApplicationShortcutItem* newShortcut = [[UIMutableApplicationShortcutItem alloc] initWithType:@"repo1" localizedTitle:currentSource.name localizedSubtitle:nil icon:nil userInfo:@{@"repoURL": currentSource.rooturi}];
-			NSMutableArray *newShortcuts = [NSMutableArray arrayWithArray:[UIApplication sharedApplication].shortcutItems];
-			newShortcuts[0] = newShortcut;
-			[UIApplication sharedApplication].shortcutItems = newShortcuts;
-		}]);
-		
-		UIAlertAction *secondPlaceAction([UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Slot 2 \"%@\"", secondShortcut.localizedTitle] style:UIAlertActionStyleDefault handler:^(UIAlertAction*action){
-			UIMutableApplicationShortcutItem* newShortcut = [[UIMutableApplicationShortcutItem alloc] initWithType:@"repo2" localizedTitle:currentSource.name localizedSubtitle:nil icon:nil userInfo:@{@"repoURL": currentSource.rooturi}];
-			NSMutableArray *newShortcuts = [NSMutableArray arrayWithArray:[UIApplication sharedApplication].shortcutItems];
-			newShortcuts[1] = newShortcut;
-			[UIApplication sharedApplication].shortcutItems = newShortcuts;
+-(void)favoriteGestureRecognized:(UILongPressGestureRecognizer*)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded) {
+        Source *currentSource([self sourceAtIndexPath:[list_ indexPathForCell:(UITableViewCell*)gestureRecognizer.view]]);
+        
+        UIAlertController *favoriteSheet([UIAlertController alertControllerWithTitle:@"Set as favorite" message:[NSString stringWithFormat:@"Choose which favorite to replace with \"%@\"", currentSource.name] preferredStyle:UIAlertControllerStyleActionSheet]);
+        
+        UIApplicationShortcutItem *firstShortcut([UIApplication sharedApplication].shortcutItems[0]);
+        UIApplicationShortcutItem *secondShortcut([UIApplication sharedApplication].shortcutItems[1]);
+        
+        UIAlertAction *firstPlaceAction([UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Slot 1 \"%@\"", firstShortcut.localizedTitle] style:UIAlertActionStyleDefault handler:^(UIAlertAction*action){
+            UIMutableApplicationShortcutItem* newShortcut = [[UIMutableApplicationShortcutItem alloc] initWithType:@"repo1" localizedTitle:currentSource.name localizedSubtitle:nil icon:nil userInfo:@{@"repoURL": currentSource.rooturi}];
+            NSMutableArray *newShortcuts = [NSMutableArray arrayWithArray:[UIApplication sharedApplication].shortcutItems];
+            newShortcuts[0] = newShortcut;
+            [UIApplication sharedApplication].shortcutItems = newShortcuts;
+        }]);
+        
+        UIAlertAction *secondPlaceAction([UIAlertAction actionWithTitle:[NSString stringWithFormat:@"Slot 2 \"%@\"", secondShortcut.localizedTitle] style:UIAlertActionStyleDefault handler:^(UIAlertAction*action){
+            UIMutableApplicationShortcutItem* newShortcut = [[UIMutableApplicationShortcutItem alloc] initWithType:@"repo2" localizedTitle:currentSource.name localizedSubtitle:nil icon:nil userInfo:@{@"repoURL": currentSource.rooturi}];
+            NSMutableArray *newShortcuts = [NSMutableArray arrayWithArray:[UIApplication sharedApplication].shortcutItems];
+            newShortcuts[1] = newShortcut;
+            [UIApplication sharedApplication].shortcutItems = newShortcuts;
+            
+        }]);
+        UIAlertAction *cancelAction([UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:nil]);
+        
+        [favoriteSheet addAction:firstPlaceAction];
+        [favoriteSheet addAction:secondPlaceAction];
+        [favoriteSheet addAction:cancelAction];
+        
+        [self presentViewController:favoriteSheet animated:true completion:nil];
+    }
+}
 
-		}]);
-		UIAlertAction *cancelAction([UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDestructive handler:nil]);
-		
-		[favouriteSheet addAction:firstPlaceAction];
-		[favouriteSheet addAction:secondPlaceAction];
-		[favouriteSheet addAction:cancelAction];
-		
-		[self presentViewController:favouriteSheet animated:true completion:nil];
-	}
+- (void)shareRepo:(Source *)source {
+    NSString *repoUrl = source.rooturi;
+    UIActivityViewController *activityVC = [[UIActivityViewController alloc] initWithActivityItems:@[ repoUrl ] applicationActivities:nil];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+        [self presentViewController:activityVC animated:YES completion:nil];
+    } else {
+        UIPopoverController *popup = [[UIPopoverController alloc] initWithContentViewController:activityVC];
+        [popup presentPopoverFromRect:CGRectMake(self.view.frame.size.width/2, self.view.frame.size.height/4, 0, 0)inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -142,28 +166,41 @@
     [[self navigationController] pushViewController:controller animated:YES];
 }
 
-- (BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    if ([indexPath section] != 1)
-        return false;
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([indexPath section] != 1) {
+        return NO;
+    }
     Source *source = [self sourceAtIndexPath:indexPath];
     return [source record] != nil;
 }
 
-- (void) tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    _assert([indexPath section] == 1);
-    if (editingStyle ==  UITableViewCellEditingStyleDelete) {
-        Source *source = [self sourceAtIndexPath:indexPath];
-        if (source == nil) return;
+- (NSArray *)tableView:(UITableView *)tableView editActionsForRowAtIndexPath:(NSIndexPath *)indexPath {
+    Source *source([self sourceAtIndexPath:indexPath]);
+    
+    _UITableViewCellActionButton *shareButton = [_UITableViewCellActionButton buttonWithType:UIButtonTypeCustom];
+    [shareButton setTitle:@"Share" forState:UIControlStateNormal];
+    shareButton.backgroundColor = [UIColor grayColor];
+    UITableViewRowAction *copyAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        [tableView setEditing:NO animated:YES];
+        [self shareRepo:source];
+    }];
+    
+    _UITableViewCellActionButton *removeButton = [_UITableViewCellActionButton buttonWithType:UIButtonTypeCustom];
+    [removeButton setTitle:@"Delete" forState:UIControlStateNormal];
+    removeButton.backgroundColor = [UIColor redColor];
+    UITableViewRowAction *removeAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDestructive title:@"" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        if (!source) return;
         
         [Sources_ removeObjectForKey:[source key]];
-        
         [delegate_ _saveConfig];
         [delegate_ reloadDataWithInvocation:nil];
-    }
-}
-
-- (void) tableView:(UITableView *)tableView didEndEditingRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self updateButtonsForEditingStatusAnimated:YES];
+    }];
+    
+    [copyAction _setButton:shareButton];
+    [removeAction _setButton:removeButton];
+    copyAction.backgroundColor = [UIColor grayColor];
+    removeAction.backgroundColor = [UIColor redColor];
+    return @[ copyAction, removeAction ];
 }
 
 - (void) complete {
@@ -396,6 +433,10 @@
 - (void) loadView {
     list_ = [[[UITableView alloc] initWithFrame:[[UIScreen mainScreen] applicationFrame]
                                           style:UITableViewStylePlain] autorelease];
+    // TODO: fix background color
+    if(UIColor.isDarkModeEnabled) {
+        [list_ setBackgroundColor:[UIColor cydia_black]];
+    }
     [list_ setAutoresizingMask:UIViewAutoresizingFlexibleBoth];
     [list_ setRowHeight:53];
     [(UITableView *) list_ setDataSource:self];
@@ -412,7 +453,6 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
     [list_ setEditing:NO];
     [self updateButtonsForEditingStatusAnimated:NO];
 }
@@ -486,8 +526,9 @@
 }
 
 - (void) refreshButtonClicked {
-    if ([delegate_ requestUpdate])
+    if ([delegate_ requestUpdate]) {
         [self updateButtonsForEditingStatusAnimated:YES];
+    }
 }
 
 - (void) cancelButtonClicked {
@@ -502,28 +543,29 @@
 #pragma mark - 3D Touch
 
 - (void) selectSourceWithURL:(NSString*)sourceURL {
-	
-	// If sources is nil, then it hasn't fully loaded yet. We'll call this function again on viewDidAppear
-	if (!sources_.operator->()) {
-		currentRepoURL = sourceURL;
-		return;
-	}
-	
-	// Otherwise, we'll find the source we want and select it
-	NSLog(@"Selecting source: %@", sourceURL);
-	
-	for (int i = 0; i < [sources_ count]; i++) {
-		Source *currentSource = [sources_ objectAtIndex:i];
-		if ([[currentSource rooturi] isEqualToString:sourceURL]) {
-			[list_ selectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1] animated:false scrollPosition:UITableViewScrollPositionNone];
-			[[list_ delegate] tableView:list_ didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1]];
-			return;
-		}
-	}
-	
-	// If the source is not found, or a bug happens, the program will reach this line
-	NSLog(@"Source \"%@\" not found in the list of sources", sourceURL);
-	
+    
+    // If sources is nil, then it hasn't fully loaded yet. We'll call this function again on viewDidAppear
+    if (!sources_.operator->()) {
+        currentRepoURL = sourceURL;
+        return;
+    }
+    
+    // Otherwise, we'll find the source we want and select it
+    NSLog(@"Selecting source: %@", sourceURL);
+    
+    for (int i = 0; i < [sources_ count]; i++) {
+        Source *currentSource = [sources_ objectAtIndex:i];
+        if ([[currentSource rooturi] isEqualToString:sourceURL]) {
+            [list_ selectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1] animated:false scrollPosition:UITableViewScrollPositionNone];
+            [[list_ delegate] tableView:list_ didSelectRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:1]];
+            return;
+        }
+    }
+    
+    // If the source is not found, or a bug happens, the program will reach this line
+    NSLog(@"Source \"%@\" not found in the list of sources", sourceURL);
+    
 }
 
 @end
+

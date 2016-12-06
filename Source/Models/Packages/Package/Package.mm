@@ -10,7 +10,7 @@
 #import "DisplayHelpers.hpp"
 #import "Source.h"
 #import "Standard.h"
-#import "LMXTransliterate.h"
+#import "LMXLocalizedTableSections.h"
 
 #include <fstream>
 
@@ -237,7 +237,7 @@
             installed_.set(NULL, StripVersion_(current.VerStr()));
         _end
         
-        [LMXTransliterate transliterate:name_ pool:pool_ output:&transform_];
+        [LMXLocalizedTableSections transliterate:name_ pool:pool_ output:&transform_];
         
         _profile(Package$initWithVersion$Tags)
         pkgCache::TagIterator tag(iterator.TagList());
@@ -889,15 +889,36 @@
     return rank_;
 }
 
-- (BOOL) matches:(NSArray *)query {
+- (BOOL) matches:(NSArray<NSString *> *)query {
     if (query == nil || [query count] == 0)
         return NO;
-    
     rank_ = 0;
     
     NSString *string;
     NSRange range;
     NSUInteger length;
+	
+	if ([query[0].lowercaseString isEqualToString:@"author:"]) {
+		NSMutableArray *authorTerms = [query mutableCopy];
+		[authorTerms removeObjectAtIndex:0];
+		[self parse];
+		if (self.author.name.length > 0) {
+			for (NSString *term in authorTerms) {
+				range = [self.author.name rangeOfString:term options:MatchCompareOptions_];
+                if (range.location != NSNotFound) {
+					rank_ -= 4 * 100000;
+                }
+			}
+		} else if (self.maintainer.name.length > 0) {
+			for (NSString *term in authorTerms) {
+				range = [self.maintainer.name rangeOfString:term options:MatchCompareOptions_];
+                if (range.location != NSNotFound) {
+					rank_ -= 4 * 1000000;
+                }
+			}
+		}
+		return rank_ != 0;
+	}
     
     string = [self name];
     length = [string length];
@@ -1012,6 +1033,10 @@
         if (!state.Install())
             cache->SetReInstall(iterator_, true);
     } }
+
+- (bool)isFavorited {
+    return [[database_ currentFavorites] containsObject:[self id]];
+}
 
 - (void) remove {
     @synchronized (database_) {

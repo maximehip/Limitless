@@ -67,6 +67,7 @@
 "EXPANDED_SIZE" = "Expanded Size";
 "EXPERT" = "Expert";
 "FAQ" = "FAQ";
+"FAVORITES" = "Favorites";
 "FEATURED_PACKAGES" = "Featured Packages";
 "FILES" = "Files";
 "FILESYSTEM_CONTENT" = "Filesystem Content";
@@ -149,6 +150,7 @@
 "RECOMMENDED_BOOKS" = "Recommended Books";
 "REFRESH" = "Refresh";
 "REFRESHING_DATA" = "Refreshing Data";
+"REFRESHING_SYSTEM" = "Refreshing system...";
 "REINSTALL" = "Reinstall";
 "RELOAD" = "Reload";
 "RELOADING_DATA" = "Reloading Data";

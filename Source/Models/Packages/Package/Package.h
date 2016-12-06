@@ -15,6 +15,7 @@
 #import "Profiling.hpp"
 #import "Unicode.h"
 #import "NSString+Cydia.hpp"
+#import "LMXLocalizedTableSections.h"
 
 struct ParsedPackage {
     CYString md5sum_;
@@ -96,6 +97,7 @@ struct ParsedPackage {
 - (bool) setSubscribed:(bool)subscribed;
 
 - (BOOL) ignored;
+- (bool)isFavorited;
 
 - (NSString *) latest;
 - (NSString *) installed;
@@ -259,7 +261,12 @@ static inline CFComparisonResult StringNameCompare(CFStringRef lhn, CFStringRef 
     _end
     
     _profile(PackageNameCompare$Compare)
-    return CFStringCompareWithOptionsAndLocale(lhn, rhn, CFRangeMake(0, length), LaxCompareFlags_, (CFLocaleRef) (id) CollationLocale_);
+    NSLocale *locale = LMXLocalizedTableSections.collationLocale;
+    return CFStringCompareWithOptionsAndLocale(lhn,
+                                               rhn,
+                                               CFRangeMake(0, length),
+                                               LaxCompareFlags_,
+                                               (CFLocaleRef) locale);
     _end
     _end
 }

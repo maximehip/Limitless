@@ -11,6 +11,7 @@
 #import "Section.h"
 #import "CYPackageController.h"
 #import "PackageCell.h"
+#import "InstalledController.h"
 
 @implementation PackageListController
 
@@ -71,8 +72,8 @@
 - (void) keyboardWillShow:(NSNotification *)notification {
     CGRect bounds;
     CGPoint center;
-    [[[notification userInfo] objectForKey:UIKeyboardBoundsUserInfoKey] getValue:&bounds];
-    [[[notification userInfo] objectForKey:UIKeyboardCenterEndUserInfoKey] getValue:&center];
+    [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] getValue:&bounds];
+    [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] getValue:&center];
     
     NSTimeInterval duration;
     UIViewAnimationCurve curve;
@@ -150,10 +151,16 @@
         
         Section *section([sections_ objectAtIndex:[path section]]);
         NSInteger row([path row]);
-        Package *package([packages_ objectAtIndex:([section row] + row)]);
+        Package *package;
+        if (InstalledController.isFiltered) {
+            package = [[database_ currentFavorites] objectAtIndex:([section row] + row)];
+        } else {
+            package = [packages_ objectAtIndex:([section row] + row)];
+        }
         return [[package retain] autorelease];
-    } }
-
+    }
+}
+    
 - (UITableViewCell *) tableView:(UITableView *)table cellForRowAtIndexPath:(NSIndexPath *)path {
     PackageCell *cell((PackageCell *) [table dequeueReusableCellWithIdentifier:@"Package"]);
     if (cell == nil)
@@ -161,6 +168,7 @@
     
     Package *package([database_ packageWithName:[[self packageAtIndexPath:path] id]]);
     [cell setPackage:package asSummary:[self isSummarized]];
+    
     return cell;
 }
 
@@ -174,8 +182,35 @@
     return thumbs_;
 }
 
-- (NSInteger) tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title atIndex:(NSInteger)index {
-    return offset_[index];
+- (NSInteger) tableView:(UITableView *)tableView sectionForSectionIndexTitle:(NSString *)title
+                atIndex:(NSInteger)index {
+    NSNumber *section = _sectionsForIndexTitles[index];
+    
+    return section.integerValue;
+}
+
+- (NSArray *)tableView:(UITableView *)tableView
+editActionsForRowAtIndexPath:(NSIndexPath *)path {
+    // FIXME: Favorites broken. Switching off for Beta 5
+    return @[];
+    
+    Package *package([self packageAtIndexPath:path]);
+    package = [database_ packageWithName:[package id]];
+    
+    _UITableViewCellActionButton *favoritesButton = [_UITableViewCellActionButton buttonWithType:UIButtonTypeCustom];
+    [favoritesButton setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+    favoritesButton.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    favoritesButton.backgroundColor = [UIColor systemDarkGreenColor];
+    UITableViewRowAction *addToFavoritesAction = [UITableViewRowAction rowActionWithStyle:UITableViewRowActionStyleDefault title:@"" handler:^(UITableViewRowAction *action, NSIndexPath *indexPath) {
+        
+        [tableView setEditing:NO animated:YES];
+        [database_ addPackageToFavoritesList:package];
+        [list_ reloadData];
+        
+    }];
+    [addToFavoritesAction _setButton:favoritesButton];
+    addToFavoritesAction.backgroundColor = [UIColor systemDarkGreenColor];
+    return @[ addToFavoritesAction ];
 }
 
 - (void) updateHeight {
@@ -215,7 +250,7 @@
     sections_ = nil;
     
     thumbs_ = nil;
-    offset_.clear();
+    _sectionsForIndexTitles = nil;
     
     [super releaseSubviews];
 }
@@ -238,7 +273,8 @@
         NSArray *packages([database_ packages]);
         
         return [NSMutableArray arrayWithArray:packages];
-    } }
+    }
+}
 
 - (void) _reloadData {
     if (reloading_ != 0) {
@@ -276,7 +312,7 @@ reload:
         reloading_ = 0;
         
         thumbs_ = nil;
-        offset_.clear();
+        _sectionsForIndexTitles = nil;
         
         packages_ = packages;
         
@@ -306,15 +342,17 @@ reload:
     NSMutableArray *sections([NSMutableArray arrayWithCapacity:16]);
     Section *section(prefix);
     
-    thumbs_ = CollationThumbs_;
-    offset_ = CollationOffset_;
+    thumbs_ = LMXLocalizedTableSections.collationTableIndexTitles;
+    _sectionsForIndexTitles = [LMXLocalizedTableSections sectionsForIndexTitles];
     
+    NSArray *sectionStartStrings = LMXLocalizedTableSections.sectionStartStrings;
     size_t offset(0);
-    size_t offsets([CollationStarts_ count]);
+    size_t offsets = [sectionStartStrings count];
     
-    NSString *start([CollationStarts_ objectAtIndex:offset]);
+    NSString *start([sectionStartStrings objectAtIndex:offset]);
     size_t length([start length]);
     
+    NSArray *sectionTitles = LMXLocalizedTableSections.sectionTitles;
     for (size_t index(0); index != end; ++index) {
         if (start != nil) {
             Package *package([packages objectAtIndex:index]);
@@ -322,11 +360,11 @@ reload:
             
             //while ([start compare:name options:NSNumericSearch range:NSMakeRange(0, length) locale:CollationLocale_] != NSOrderedDescending) {
             while (StringNameCompare(start, name, length) != kCFCompareGreaterThan) {
-                NSString *title([CollationTitles_ objectAtIndex:offset]);
+                NSString *title = [sectionTitles objectAtIndex:offset];
                 section = [[[Section alloc] initWithName:title row:index localize:NO] autorelease];
                 [sections addObject:section];
                 
-                start = ++offset == offsets ? nil : [CollationStarts_ objectAtIndex:offset];
+                start = ++offset == offsets ? nil : [sectionStartStrings objectAtIndex:offset];
                 if (start == nil)
                     break;
                 length = [start length];
@@ -337,7 +375,7 @@ reload:
     }
     
     for (; offset != offsets; ++offset) {
-        NSString *title([CollationTitles_ objectAtIndex:offset]);
+        NSString *title = [sectionTitles objectAtIndex:offset];
         Section *section([[[Section alloc] initWithName:title row:end localize:NO] autorelease]);
         [sections addObject:section];
     }

@@ -13,8 +13,7 @@
 @implementation PackageCell
 
 - (PackageCell *) init {
-    CGRect frame(CGRectMake(0, 0, 320, 74));
-    if ((self = [super initWithFrame:frame reuseIdentifier:@"Package"]) != nil) {
+	if ((self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Package"]) != nil) {
         UIView *content([self contentView]);
         CGRect bounds([content bounds]);
         
@@ -41,9 +40,9 @@
     badge_ = nil;
     placard_ = nil;
     
-    if (package == nil)
+    if (package == nil) {
         [content_ setBackgroundColor:[UIColor whiteColor]];
-    else {
+    } else {
         [package parse];
         
         Source *source = [package source];
@@ -87,14 +86,20 @@
         
         if (NSString *mode = [package mode]) {
             if ([mode isEqualToString:@"REMOVE"] || [mode isEqualToString:@"PURGE"]) {
-                color = RemovingColor_;
+                color = [UIColor cydia_removingColor];
                 placard = @"removing";
             } else {
-                color = InstallingColor_;
+                color = [UIColor cydia_installingColor];
                 placard = @"installing";
             }
         } else {
-            color = [UIColor whiteColor];
+            if (package.isFavorited){
+                color = [UIColor cydia_favoritesColor];
+            } else if (UIColor.isDarkModeEnabled) {
+                color = [UIColor cydia_black];
+            } else {
+                color = [UIColor whiteColor];
+            }
             
             if ([package installed] != nil)
                 placard = @"installed";
@@ -145,11 +150,17 @@
     }
     
     if (highlighted && kCFCoreFoundationVersionNumber < 800)
-        UISetColor(White_);
-    
-    if (!highlighted)
-        UISetColor(commercial_ ? Purple_ : Black_);
-    [name_ drawAtPoint:CGPointMake(36, 8) forWidth:(width - (placard_ == nil ? 68 : 94)) withFont:Font18Bold_ lineBreakMode:NSLineBreakByTruncatingTail];
+        UISetColor([UIColor whiteColor].CGColor);
+	
+	NSMutableParagraphStyle *truncatingStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+	[truncatingStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+	
+	if (!highlighted) {
+        UISetColor(commercial_ ? [UIColor cydia_commercialColor].CGColor : [UIColor blackColor].CGColor);
+		[name_ drawInRect:CGRectMake(36, 8, width - (placard_ == nil ? 68 : 94), CGFLOAT_MAX) withAttributes:@{NSFontAttributeName:Font18Bold_,NSParagraphStyleAttributeName: truncatingStyle, NSForegroundColorAttributeName: (commercial_ ? [UIColor cydia_commercialColor] : [UIColor blackColor])}];
+	} else {
+		[name_ drawInRect:CGRectMake(36, 8, width - (placard_ == nil ? 68 : 94), CGFLOAT_MAX) withAttributes:@{NSFontAttributeName:Font18Bold_,NSParagraphStyleAttributeName: truncatingStyle}];
+	}
     
     if (placard_ != nil)
         [placard_ drawAtPoint:CGPointMake(width - 52, 11)];
@@ -188,16 +199,22 @@
     }
     
     if (highlighted && kCFCoreFoundationVersionNumber < 800)
-        UISetColor(White_);
+        UISetColor([UIColor whiteColor].CGColor);
     
     if (!highlighted)
-        UISetColor(commercial_ ? Purple_ : Black_);
-    [name_ drawAtPoint:CGPointMake(48, 8) forWidth:(width - (placard_ == nil ? 80 : 106)) withFont:Font18Bold_ lineBreakMode:NSLineBreakByTruncatingTail];
-    [source_ drawAtPoint:CGPointMake(58, 29) forWidth:(width - 95) withFont:Font12_ lineBreakMode:NSLineBreakByTruncatingTail];
+        UISetColor(commercial_ ? [UIColor cydia_commercialColor].CGColor : [UIColor blackColor].CGColor);
+	
+	NSMutableParagraphStyle *truncatingStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopy];
+	[truncatingStyle setLineBreakMode:NSLineBreakByTruncatingTail];
+	
+	[name_ drawInRect:CGRectMake(48, 8, (width - (placard_ == nil ? 80 : 106)), CGFLOAT_MAX) withAttributes:@{NSFontAttributeName: Font18Bold_, NSParagraphStyleAttributeName: truncatingStyle}];
+	[source_ drawInRect:CGRectMake(58, 29, (width - 29), CGFLOAT_MAX) withAttributes:@{NSFontAttributeName: Font12_, NSParagraphStyleAttributeName: truncatingStyle}];
     
-    if (!highlighted)
-        UISetColor(commercial_ ? Purplish_ : Gray_);
-    [description_ drawAtPoint:CGPointMake(12, 46) forWidth:(width - 46) withFont:Font14_ lineBreakMode:NSLineBreakByTruncatingTail];
+	if (!highlighted) {
+        UISetColor(commercial_ ? [UIColor cydia_commercialVariantColor].CGColor : [UIColor cydia_grayColor].CGColor);
+		[description_ drawInRect:CGRectMake(12, 46, (width - 46), CGFLOAT_MAX) withAttributes:@{NSFontAttributeName: Font14_, NSParagraphStyleAttributeName: truncatingStyle, NSForegroundColorAttributeName: (commercial_ ? [UIColor cydia_commercialVariantColor] : [UIColor cydia_grayColor])}];
+	} else
+		[description_ drawInRect:CGRectMake(12, 46, (width - 46), CGFLOAT_MAX) withAttributes:@{NSFontAttributeName: Font14_, NSParagraphStyleAttributeName: truncatingStyle}];
     
     if (placard_ != nil)
         [placard_ drawAtPoint:CGPointMake(width - 52, 9)];
